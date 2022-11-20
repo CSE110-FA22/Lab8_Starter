@@ -8,3 +8,4 @@ test('adds 1 + 2 to equal 3', () => {
 test('Checks the sum function', () => {
 	expect(sum(1,2)).toBe(3);
 });
+

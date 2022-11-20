@@ -11,8 +11,12 @@
 > Answer: 
 - I would probably use unit testing instead of E2E for testing function outputs since it's easier to intercept the function calls and the outputs in the code using unit testing rather than having to wait to measure the function output to have effect on the UI elements.
 
-> ### Expose Section 
+> Question 3: Would you use unit testing for message feature of the application?
 
-Goals:
-- [ ] Complete E2E testing with puppeteer
+> Answer:
+- I would probably not use unit testing for this feature since it would most likely require the functioning of other components as well, and unti testing is more suited for testing components themselves in isolation rather than how the components interact with each other.
 
+> Question 4: Would you use unit testing for max message length feature of the application?
+
+> Answer:
+- I probably would use this feature this can be tested in isolation without affecting other parts of the code or needing to interact with other parts of the code. :wq
