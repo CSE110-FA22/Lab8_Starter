@@ -46,6 +46,7 @@ describe('Basic user flow for Website', () => {
   // the button swaps to "Remove from Cart"
   it('Clicking the "Add to Cart" button should change button text', async () => {
     console.log('Checking the "Add to Cart" button...');
+
     // TODO - Step 2
     // Query a <product-item> element using puppeteer ( checkout page.$() and page.$$() in the docs )
     // Grab the shadowRoot of that element (it's a property), then query a button from that shadowRoot.
@@ -57,19 +58,36 @@ describe('Basic user flow for Website', () => {
   // number in the top right has been correctly updated
   it('Checking number of items in cart on screen', async () => {
     console.log('Checking number of items in cart on screen...');
+
     // TODO - Step 3
     // Query select all of the <product-item> elements, then for every single product element
     // get the shadowRoot and query select the button inside, and click on it.
     // Check to see if the innerText of #cart-count is 20
+    const prodItems = await page.$$('product-item');
+    for(let i=0; i<20; i++) {
+      let data = await prodItems[i].getProperty('shadowRoot');
+      const dataButton = await data.$('button').click();   
+    }
+    const cartCount = document.getElementById('cart-count').innerText;
+    expect(cartCount).toBe(20);
   }, 10000);
 
   // Check to make sure that after you reload the page it remembers all of the items in your cart
   it('Checking number of items in cart on screen after reload', async () => {
     console.log('Checking number of items in cart on screen after reload...');
+
     // TODO - Step 4
     // Reload the page, then select all of the <product-item> elements, and check every
     // element to make sure that all of their buttons say "Remove from Cart".
     // Also check to make sure that #cart-count is still 20
+    location.reload();
+    const prodItems = await page.$$('product-item');
+    for (let i=0; i<20; i++) {
+      let data = await prodItems[i].innerText;
+      expect(data).toBe("Remove from Cart");
+    }
+    const cartCount = document.getElementById('cart-count').innerText;
+    expect(cartCount).toBe(20);
   }, 10000);
 
   // Check to make sure that the cart in localStorage is what you expect
